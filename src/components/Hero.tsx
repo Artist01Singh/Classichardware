@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { ArrowRight, Phone, MapPin, CheckCircle2, Sparkles, Layers } from 'lucide-react';
+import { ArrowRight, Phone, MapPin, Sparkles } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
+import { IMAGES } from '../assets/imageRegistry';
+import { SafeImage } from './SafeImage';
 
 interface HeroProps {
   onExplore: () => void;
@@ -15,21 +17,21 @@ export const Hero: React.FC<HeroProps> = ({ onExplore, onBook }) => {
       id: 'showroom-interior',
       label: 'Showroom Boutique',
       sublabel: 'Physical Store & Exhibits',
-      image: '/src/assets/images/showroom_interior_store_1794506590256.jpg',
+      image: IMAGES.showroomBoutique,
       caption: 'Visit Classic Hardware showroom to explore hundreds of live architectural handles, locks, and tactile brass displays.'
     },
     {
       id: 'knurled-brass',
       label: 'Craftsmanship Detail',
       sublabel: 'Solid Brass Knurling',
-      image: '/src/assets/images/hero_hardware_craftsmanship_1794507289220.jpg',
+      image: IMAGES.craftsmanshipKnurled,
       caption: 'Precision knurled lever handle & euro cylinder in PVD brushed brass on dark travertine stone.'
     },
     {
       id: 'fluted-suite',
       label: 'Architectural Door Suite',
       sublabel: 'Fluted Walnut Entrance',
-      image: '/src/assets/images/hero_luxury_architectural_brass_1794507289824.jpg',
+      image: IMAGES.flutedWalnutDoor,
       caption: 'Bespoke grand entrance door with matching solid brass mortise lock and designer lever handle.'
     }
   ];
@@ -92,7 +94,7 @@ export const Hero: React.FC<HeroProps> = ({ onExplore, onBook }) => {
 
               <button
                 onClick={onBook}
-                className="px-4 py-3.5 text-slate-300 hover:text-white font-medium text-xs sm:text-sm transition-colors whitespace-nowrap shrink-0 underline decoration-slate-600 underline-offset-4"
+                className="px-4 py-3.5 text-slate-300 hover:text-white font-medium text-xs sm:text-sm transition-colors whitespace-nowrap shrink-0 underline decoration-slate-600 underline-offset-4 cursor-pointer"
               >
                 Book Showroom Visit
               </button>
@@ -140,16 +142,12 @@ export const Hero: React.FC<HeroProps> = ({ onExplore, onBook }) => {
             <div className="relative rounded-2xl overflow-hidden border border-slate-800/90 bg-slate-950 shadow-2xl group">
               {/* Main Premium Photography */}
               <div className="relative h-[420px] sm:h-[500px] lg:h-[540px] overflow-hidden bg-slate-900">
-                <img
+                <SafeImage
                   key={activeView.id}
                   src={activeView.image}
                   alt={activeView.caption}
-                  referrerPolicy="no-referrer"
+                  fallbackTitle={activeView.label}
                   className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105"
-                  onError={(e) => {
-                    const target = e.target as HTMLElement;
-                    target.style.display = 'none';
-                  }}
                 />
 
                 {/* Measured luxury gradient scrim */}
@@ -165,8 +163,8 @@ export const Hero: React.FC<HeroProps> = ({ onExplore, onBook }) => {
 
                 {/* Floating Tactile Hardware Inset Preview */}
                 <div className="hidden sm:flex absolute top-4 right-4 z-10 p-2 rounded-xl bg-slate-950/90 backdrop-blur-md border border-slate-800 shadow-xl items-center gap-2.5 max-w-[210px]">
-                  <img
-                    src="/src/assets/images/hero_hardware_craftsmanship_1794507289220.jpg"
+                  <SafeImage
+                    src={IMAGES.craftsmanshipKnurled}
                     alt="Tactile Knurled Brass Detail"
                     className="w-11 h-11 rounded-lg object-cover border border-amber-500/30 shrink-0"
                   />

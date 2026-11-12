@@ -12,6 +12,7 @@ import {
   INITIAL_REVIEWS,
   INITIAL_FAQS
 } from '../data/initialData';
+import { resolveImageSrc } from '../assets/imageRegistry';
 
 export interface CartItem {
   product: Product;
@@ -61,16 +62,36 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     return saved ? JSON.parse(saved) : INITIAL_BUSINESS_CONFIG;
   });
 
-  // Products
+  // Products (migrate default item images & legacy paths to bundled URLs)
   const [products, setProducts] = useState<Product[]>(() => {
-    const saved = localStorage.getItem('ch_products');
-    return saved ? JSON.parse(saved) : INITIAL_PRODUCTS;
+    const saved = localStorage.getItem('ch_products_v2') || localStorage.getItem('ch_products');
+    if (!saved) return INITIAL_PRODUCTS;
+    try {
+      const parsed: Product[] = JSON.parse(saved);
+      const initialById = new Map(INITIAL_PRODUCTS.map(p => [p.id, p.image]));
+      return parsed.map(p => ({
+        ...p,
+        image: initialById.get(p.id) || resolveImageSrc(p.image)
+      }));
+    } catch {
+      return INITIAL_PRODUCTS;
+    }
   });
 
-  // Gallery
+  // Gallery (use v2 default gallery or resolve bundled URLs)
   const [gallery, setGallery] = useState<GalleryItem[]>(() => {
-    const saved = localStorage.getItem('ch_gallery');
-    return saved ? JSON.parse(saved) : INITIAL_GALLERY;
+    const savedV2 = localStorage.getItem('ch_gallery_v2');
+    if (!savedV2) return INITIAL_GALLERY;
+    try {
+      const parsed: GalleryItem[] = JSON.parse(savedV2);
+      const initialById = new Map(INITIAL_GALLERY.map(g => [g.id, g.image]));
+      return parsed.map(g => ({
+        ...g,
+        image: initialById.get(g.id) || resolveImageSrc(g.image)
+      }));
+    } catch {
+      return INITIAL_GALLERY;
+    }
   });
 
   // Reviews
@@ -122,7 +143,20 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   // Cart
   const [cart, setCart] = useState<CartItem[]>(() => {
     const saved = localStorage.getItem('ch_cart');
-    return saved ? JSON.parse(saved) : [];
+    if (!saved) return [];
+    try {
+      const parsed: CartItem[] = JSON.parse(saved);
+      const initialById = new Map(INITIAL_PRODUCTS.map(p => [p.id, p.image]));
+      return parsed.map(item => ({
+        ...item,
+        product: {
+          ...item.product,
+          image: initialById.get(item.product.id) || resolveImageSrc(item.product.image)
+        }
+      }));
+    } catch {
+      return [];
+    }
   });
 
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -137,11 +171,11 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, [business]);
 
   useEffect(() => {
-    localStorage.setItem('ch_products', JSON.stringify(products));
+    localStorage.setItem('ch_products_v2', JSON.stringify(products));
   }, [products]);
 
   useEffect(() => {
-    localStorage.setItem('ch_gallery', JSON.stringify(gallery));
+    localStorage.setItem('ch_gallery_v2', JSON.stringify(gallery));
   }, [gallery]);
 
   useEffect(() => {

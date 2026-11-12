@@ -17,6 +17,8 @@ import {
 } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
 import { Product } from '../data/initialData';
+import { IMAGES } from '../assets/imageRegistry';
+import { SafeImage } from './SafeImage';
 
 export const AdminModal: React.FC = () => {
   const {
@@ -109,7 +111,7 @@ export const AdminModal: React.FC = () => {
         description: prodDesc,
         features: ['Precision engineered', 'Tested for 200,000 cycles', 'Corrosion resistant PVD'],
         inStock: true,
-        image: '/src/assets/images/hero_architectural_hardware_1794506587523.jpg',
+        image: prodCategory === 'locks' ? IMAGES.precisionMortiseLock : prodCategory === 'cabinet' ? IMAGES.cabinetPullsKitchen : prodCategory === 'sanitary' ? IMAGES.brassBathroomSuite : IMAGES.doorHandlesMarble,
         sku: prodSku || `CH-${Date.now().toString().slice(-4)}`
       });
     }
@@ -156,7 +158,7 @@ export const AdminModal: React.FC = () => {
       title: galTitle,
       category: galCategory,
       description: galDesc,
-      image: '/src/assets/images/showroom_interior_store_1794506590256.jpg'
+      image: IMAGES.showroomBoutique
     });
     setGalTitle('');
     setGalDesc('');
@@ -524,7 +526,7 @@ export const AdminModal: React.FC = () => {
                     {products.map((p) => (
                       <div key={p.id} className="p-3.5 flex items-center justify-between text-xs hover:bg-slate-50">
                         <div className="flex items-center gap-3">
-                          <img src={p.image} alt={p.name} className="w-10 h-10 rounded object-cover border" />
+                          <SafeImage src={p.image} alt={p.name} className="w-10 h-10 rounded object-cover border" />
                           <div>
                             <div className="font-bold text-slate-900">{p.name}</div>
                             <div className="text-[11px] text-slate-500">
@@ -709,7 +711,7 @@ export const AdminModal: React.FC = () => {
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                     {gallery.map((g) => (
                       <div key={g.id} className="bg-white border rounded-lg overflow-hidden group relative">
-                        <img src={g.image} alt={g.title} className="w-full h-32 object-cover" />
+                        <SafeImage src={g.image} alt={g.title} className="w-full h-32 object-cover" />
                         <div className="p-2.5">
                           <div className="font-bold text-xs truncate">{g.title}</div>
                           <div className="text-[10px] text-slate-500">{g.category}</div>

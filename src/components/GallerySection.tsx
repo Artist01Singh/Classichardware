@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Eye, ChevronLeft, ChevronRight, X, Maximize2 } from 'lucide-react';
+import { ChevronLeft, ChevronRight, X, Maximize2 } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
-import { GalleryItem } from '../data/initialData';
+import { SafeImage } from './SafeImage';
 
 export const GallerySection: React.FC = () => {
   const { gallery } = useStore();
@@ -77,10 +77,10 @@ export const GallerySection: React.FC = () => {
               onClick={() => openLightbox(index)}
               className="group relative rounded-xl overflow-hidden bg-slate-100 border border-slate-200 cursor-pointer shadow-xs hover:shadow-lg transition-all duration-300 h-72"
             >
-              <img
+              <SafeImage
                 src={item.image}
                 alt={item.title}
-                referrerPolicy="no-referrer"
+                fallbackTitle={item.title}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5">
@@ -149,10 +149,10 @@ export const GallerySection: React.FC = () => {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="max-h-[75vh] rounded-lg overflow-hidden border border-slate-800 bg-black flex items-center justify-center">
-                <img
+                <SafeImage
                   src={filteredItems[lightboxIndex].image}
                   alt={filteredItems[lightboxIndex].title}
-                  referrerPolicy="no-referrer"
+                  fallbackTitle={filteredItems[lightboxIndex].title}
                   className="max-h-[75vh] w-auto object-contain"
                 />
               </div>

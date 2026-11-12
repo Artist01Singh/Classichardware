@@ -1,6 +1,8 @@
 import React from 'react';
-import { ArrowRight, Check, MapPin, Phone, Building2, ShieldCheck } from 'lucide-react';
+import { ArrowRight, MapPin, Phone, Building2, ShieldCheck } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
+import { IMAGES } from '../assets/imageRegistry';
+import { SafeImage } from './SafeImage';
 
 interface AboutSectionProps {
   onBookConsultation: () => void;
@@ -16,10 +18,10 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onBookConsultation }
           {/* Image & Showroom Showcase */}
           <div className="lg:col-span-6 relative">
             <div className="relative rounded-2xl overflow-hidden border border-slate-200 bg-slate-100 shadow-lg group">
-              <img
-                src="/src/assets/images/showroom_interior_store_1794506590256.jpg"
+              <SafeImage
+                src={IMAGES.showroomBoutique}
                 alt="Classic Hardware Boutique Showroom Interior"
-                referrerPolicy="no-referrer"
+                fallbackTitle="Classic Hardware Showroom"
                 className="w-full h-[420px] sm:h-[480px] object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />

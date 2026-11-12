@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { X, Trash2, ShoppingBag, Plus, Minus, ArrowRight, MessageSquare, Send, CheckCircle2 } from 'lucide-react';
+import { X, Trash2, ShoppingBag, Plus, Minus, MessageSquare, Send, CheckCircle2 } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
+import { SafeImage } from './SafeImage';
 
 export const QuoteDrawer: React.FC = () => {
   const { cart, isCartOpen, setIsCartOpen, removeFromCart, updateCartQuantity, clearCart, business, submitEnquiry } = useStore();
@@ -110,10 +111,10 @@ export const QuoteDrawer: React.FC = () => {
                   key={`${item.product.id}-${item.finish}`}
                   className="p-3.5 bg-slate-50 border border-slate-200 rounded-xl flex gap-3 items-center"
                 >
-                  <img
+                  <SafeImage
                     src={item.product.image}
                     alt={item.product.name}
-                    referrerPolicy="no-referrer"
+                    fallbackTitle={item.product.name}
                     className="w-16 h-16 rounded-lg object-cover bg-white shrink-0 border border-slate-200"
                   />
 

@@ -9,6 +9,7 @@ import { AnnouncementBar } from './components/AnnouncementBar';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { TrustBar } from './components/TrustBar';
+import { HomeFeaturedShowcase } from './components/HomeFeaturedShowcase';
 import { ProductsSection } from './components/ProductsSection';
 import { AboutSection } from './components/AboutSection';
 import { WhyChooseUs } from './components/WhyChooseUs';
@@ -25,6 +26,7 @@ import { MobileStickyBar } from './components/MobileStickyBar';
 
 function MainWebsite() {
   const [activeSection, setActiveSection] = useState('home');
+  const [catalogCategory, setCatalogCategory] = useState<string>('all');
 
   const scrollToSection = (id: string) => {
     setActiveSection(id);
@@ -46,13 +48,18 @@ function MainWebsite() {
     }
   };
 
+  const handleSelectHomeCategory = (categoryKey: string) => {
+    setCatalogCategory(categoryKey);
+    scrollToSection('products');
+  };
+
   // Scroll spy to update activeSection on scroll
   useEffect(() => {
     const handleScroll = () => {
       const sections = ['contact', 'booking', 'faq', 'reviews', 'gallery', 'why-us', 'about', 'products'];
       const scrollPosition = window.scrollY + 200;
 
-      if (window.scrollY < 300) {
+      if (window.scrollY < 450) {
         setActiveSection('home');
         return;
       }
@@ -80,51 +87,53 @@ function MainWebsite() {
 
       {/* Main Page Sections */}
       <main className="flex-1">
-        {/* 3. Hero Section */}
+        {/* 3. Home Page Experience: Hero + Trust Strip + Featured Collections */}
         <div id="home">
           <Hero
             onExplore={() => scrollToSection('products')}
             onBook={() => scrollToSection('booking')}
           />
+          <TrustBar />
+          <HomeFeaturedShowcase
+            onSelectCategory={handleSelectHomeCategory}
+            onBook={() => scrollToSection('booking')}
+          />
         </div>
 
-        {/* 4. Trust Section */}
-        <TrustBar />
+        {/* 4. Services & Products Catalog */}
+        <ProductsSection externalCategory={catalogCategory} />
 
-        {/* 5. Services & Products Catalog */}
-        <ProductsSection />
-
-        {/* 6. About the Business */}
+        {/* 5. About the Business */}
         <AboutSection
           onBookConsultation={() => scrollToSection('booking')}
         />
 
-        {/* 7. Why Choose Us */}
+        {/* 6. Why Choose Us */}
         <WhyChooseUs />
 
-        {/* 8. Gallery & Showroom Lightbox */}
+        {/* 7. Gallery & Showroom Lightbox */}
         <GallerySection />
 
-        {/* 9. Customer Reviews & Google Rating */}
+        {/* 8. Customer Reviews & Google Rating */}
         <ReviewsSection />
 
-        {/* 10. FAQ Accordion */}
+        {/* 9. FAQ Accordion */}
         <FAQSection />
 
-        {/* 11. Showroom Appointment Booking */}
+        {/* 10. Showroom Appointment Booking */}
         <ShowroomBookingSection />
 
-        {/* 12. Location & Contact Section */}
+        {/* 11. Location & Contact Section */}
         <ContactSection />
 
-        {/* 13. Final CTA */}
+        {/* 12. Final CTA */}
         <FinalCTA
           onBook={() => scrollToSection('booking')}
           onExplore={() => scrollToSection('products')}
         />
       </main>
 
-      {/* 14. Footer */}
+      {/* 13. Footer */}
       <Footer onNavigate={scrollToSection} />
 
       {/* Interactive Drawers & Overlays */}

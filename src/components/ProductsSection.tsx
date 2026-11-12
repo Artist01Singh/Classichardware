@@ -1,15 +1,26 @@
-import React, { useState } from 'react';
-import { Search, ShoppingBag, Eye, MessageSquare, Check, X, SlidersHorizontal, ArrowRight } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Search, ShoppingBag, Eye, MessageSquare, Check, X } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
 import { Product } from '../data/initialData';
+import { SafeImage } from './SafeImage';
 
-export const ProductsSection: React.FC = () => {
+interface ProductsSectionProps {
+  externalCategory?: string;
+}
+
+export const ProductsSection: React.FC<ProductsSectionProps> = ({ externalCategory }) => {
   const { products, business, addToCart } = useStore();
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [activeFinish, setActiveFinish] = useState<string>('');
   const [addedNotice, setAddedNotice] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (externalCategory) {
+      setSelectedCategory(externalCategory);
+    }
+  }, [externalCategory]);
 
   const categories = [
     { id: 'all', label: 'All Hardware' },
@@ -120,10 +131,10 @@ export const ProductsSection: React.FC = () => {
               >
                 {/* Product Image Slot */}
                 <div className="relative bg-slate-100 h-56 overflow-hidden">
-                  <img
+                  <SafeImage
                     src={prod.image}
                     alt={prod.name}
-                    referrerPolicy="no-referrer"
+                    fallbackTitle={prod.name}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute top-3 left-3">
@@ -237,10 +248,10 @@ export const ProductsSection: React.FC = () => {
               <div className="p-6 overflow-y-auto max-h-[80vh]">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
                   <div className="rounded-xl overflow-hidden bg-slate-100 border border-slate-200 h-64">
-                    <img
+                    <SafeImage
                       src={selectedProduct.image}
                       alt={selectedProduct.name}
-                      referrerPolicy="no-referrer"
+                      fallbackTitle={selectedProduct.name}
                       className="w-full h-full object-cover"
                     />
                   </div>

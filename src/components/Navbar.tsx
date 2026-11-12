@@ -14,9 +14,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection }) => 
   const cartItemCount = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   const navItems = [
+    { label: 'Home', id: 'home' },
     { label: 'About', id: 'about' },
     { label: 'Products', id: 'products' },
-    { label: 'Why Choose Us', id: 'why-us' },
     { label: 'Gallery', id: 'gallery' },
     { label: 'Reviews', id: 'reviews' },
     { label: 'FAQ', id: 'faq' },
@@ -31,11 +31,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection }) => 
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between gap-8 h-20">
+        <div className="flex items-center justify-between gap-6 h-20">
           {/* Zone 1: Single text element wordmark */}
           <button
             onClick={() => handleNavClick('home')}
-            className="flex items-center gap-3 text-left focus:outline-none group cursor-pointer"
+            className="flex items-center gap-3 text-left focus:outline-none group cursor-pointer shrink-0"
           >
             <div className="w-10 h-10 rounded-lg bg-[#17191E] text-[#D97706] flex items-center justify-center font-display font-bold text-xl tracking-tighter border border-slate-700/50 group-hover:border-[#D97706] transition-colors shrink-0">
               CH
@@ -44,14 +44,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection }) => 
               <span className="text-xl font-bold tracking-tight text-[#17191E] font-display whitespace-nowrap shrink-0 leading-tight">
                 {business.name}
               </span>
-              <span className="text-[11px] font-medium tracking-widest uppercase text-slate-500">
+              <span className="text-[11px] font-medium tracking-widest uppercase text-slate-500 whitespace-nowrap">
                 Architectural Fittings
               </span>
             </div>
           </button>
 
           {/* Zone 2: Clean single-line text navigation links */}
-          <nav className="hidden lg:flex items-center gap-7 text-sm font-medium text-slate-600">
+          <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-600">
             {navItems.map((item) => (
               <button
                 key={item.id}

@@ -1,3 +1,5 @@
+import { IMAGES } from '../assets/imageRegistry';
+
 export interface Product {
   id: string;
   name: string;
@@ -106,7 +108,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     description: "Architect-grade knurled texture lever handle mounted on a circular solid brass rosette. Engineered for heavy residential and commercial entrance doors.",
     features: ["Heavy spring return mechanism", "Corrosion-resistant PVD coating", "Fits 35mm - 55mm door thickness", "Matching escutcheon included"],
     inStock: true,
-    image: "/src/assets/images/hero_hardware_craftsmanship_1794507289220.jpg",
+    image: IMAGES.craftsmanshipKnurled,
     sku: "CH-DH-KN401"
   },
   {
@@ -120,7 +122,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     description: "Sleek minimalist European profile with rounded ergonomic grip. Ideal for modern apartments, luxury villas, and boutique workspaces.",
     features: ["Silent action internal bearing", "Salt spray tested 200 hours", "Concealed screw fixing", "Ergonomic tactile balance"],
     inStock: true,
-    image: "/src/assets/images/product_luxury_door_handles_1794506588522.jpg",
+    image: IMAGES.doorHandlesMarble,
     sku: "CH-DH-MN202"
   },
   {
@@ -134,7 +136,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     description: "Industrial-grade double throw mortise lock body with computerized 6-pin brass euro cylinder and 4 anti-drill dimple keys.",
     features: ["Anti-saw hardened steel bolt", "Reversible latch for left/right doors", "Tested for 300,000 cycles", "Anti-pick cylinder mechanism"],
     inStock: true,
-    image: "/src/assets/images/product_precision_locks_security_1794506589633.jpg",
+    image: IMAGES.precisionMortiseLock,
     sku: "CH-LK-MB855"
   },
   {
@@ -148,7 +150,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     description: "Luxury tactile knurled cabinet handles designed for high-end bespoke kitchens, wardrobes, bathroom vanities, and credenzas.",
     features: ["Heavy solid brass weight", "M4 machine screws included", "Anti-fingerprint nano-lacquer", "Available in 96mm, 128mm, 160mm & 224mm"],
     inStock: true,
-    image: "/src/assets/images/product_cabinet_drawer_fittings_1794506589408.jpg",
+    image: IMAGES.cabinetPullsKitchen,
     sku: "CH-CB-KB108"
   },
   {
@@ -162,7 +164,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     description: "Ultra-smooth hydraulic damping runners with 45kg load rating. Silent closing performance tested for 50,000 push-pull actions.",
     features: ["Integrated hydraulic soft-close damper", "Quick-release trigger lever", "45 kg load capacity", "Lengths from 12-inch to 24-inch"],
     inStock: true,
-    image: "/src/assets/images/product_cabinet_drawer_fittings_1794506589408.jpg",
+    image: IMAGES.telescopicDrawerSlide,
     sku: "CH-TC-SC45"
   },
   {
@@ -176,7 +178,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     description: "Heavy 3mm thick stainless steel hinges with 4 precision ball bearings. Guaranteed noiseless, sag-free door movement for decades.",
     features: ["4 self-lubricating ball bearings", "Non-removable pin for exterior doors", "Load rating up to 80 kg/pair", "Rustproof for lifetime use"],
     inStock: true,
-    image: "/src/assets/images/hero_architectural_hardware_1794506587523.jpg",
+    image: IMAGES.ballBearingHinges,
     sku: "CH-HG-SS304"
   },
   {
@@ -190,7 +192,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     description: "State-of-the-art keyless smart lock with semiconductor fingerprint sensor, capacitive keypad, RFID card access, and mechanical backup key.",
     features: ["0.3s rapid fingerprint recognition", "Scramble PIN anti-peep technology", "Emergency USB-C power jump", "Auto-locking motorized latch"],
     inStock: true,
-    image: "/src/assets/images/showroom_interior_store_1794506590256.jpg",
+    image: IMAGES.smartBiometricLock,
     sku: "CH-LK-BIO90"
   },
   {
@@ -204,7 +206,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     description: "Coordinated architectural bathroom hardware suite featuring a 24-inch heavy towel rail, toilet paper holder, and dual robe hooks.",
     features: ["Heavy solid brass construction", "Moisture and corrosion proof", "Concealed wall mounting brackets", "5-year finish warranty"],
     inStock: true,
-    image: "/src/assets/images/showroom_interior_store_1794506590256.jpg",
+    image: IMAGES.brassBathroomSuite,
     sku: "CH-SN-STE30"
   }
 ];
@@ -212,38 +214,45 @@ export const INITIAL_PRODUCTS: Product[] = [
 export const INITIAL_GALLERY: GalleryItem[] = [
   {
     id: "gal-1",
-    title: "Luxury Fluted Walnut Entrance Door Suite",
-    category: "Door Fittings",
-    image: "/src/assets/images/hero_luxury_architectural_brass_1794507289824.jpg",
-    description: "Solid fluted dark walnut entrance door fitted with satin brass knurled lever handle and high-security cylinder."
+    title: "Classic Hardware Boutique Showroom",
+    category: "Showroom",
+    image: IMAGES.showroomBoutique,
+    description: "Dedicated consultation desks and illuminated architectural hardware wall displays in our showroom."
   },
   {
     id: "gal-2",
-    title: "Precision Knurled Brass Hardware Detail",
+    title: "Luxury Fluted Walnut Entrance Door Suite",
     category: "Door Fittings",
-    image: "/src/assets/images/hero_hardware_craftsmanship_1794507289220.jpg",
-    description: "Close-up diamond knurled brass handle and mortise lockplate mounted on dark textured travertine."
+    image: IMAGES.flutedWalnutDoor,
+    description: "Solid fluted dark walnut entrance door fitted with satin brass knurled lever handle and high-security cylinder."
   },
   {
     id: "gal-3",
-    title: "Custom Kitchen Cabinet Hardware",
-    category: "Cabinet & Kitchen",
-    image: "/src/assets/images/product_cabinet_drawer_fittings_1794506589408.jpg",
-    description: "Knurled solid brass pulls and soft-close drawer system installed on architectural dark cabinetry."
+    title: "Precision Knurled Brass Hardware Detail",
+    category: "Door Fittings",
+    image: IMAGES.craftsmanshipKnurled,
+    description: "Close-up diamond knurled brass handle and mortise lockplate mounted on dark textured travertine."
   },
   {
     id: "gal-4",
-    title: "High-Security Mechanical Locksets",
-    category: "Locks & Security",
-    image: "/src/assets/images/product_precision_locks_security_1794506589633.jpg",
-    description: "Engineered euro profile mortise lock mechanism and high-security brass computerized dimple cylinders."
+    title: "Custom Kitchen Cabinet Hardware",
+    category: "Cabinet & Kitchen",
+    image: IMAGES.cabinetPullsKitchen,
+    description: "Knurled solid brass pulls and soft-close drawer system installed on architectural dark cabinetry."
   },
   {
     id: "gal-5",
-    title: "Boutique Showroom Experience",
+    title: "High-Security Mechanical Locksets",
+    category: "Locks & Security",
+    image: IMAGES.precisionMortiseLock,
+    description: "Engineered euro profile mortise lock mechanism and high-security brass computerized dimple cylinders."
+  },
+  {
+    id: "gal-6",
+    title: "Architectural Lever & Hinges Display",
     category: "Showroom",
-    image: "/src/assets/images/showroom_interior_store_1794506590256.jpg",
-    description: "Dedicated consultation desks and tactile hardware galleries for architects, builders, and clients."
+    image: IMAGES.architecturalWall,
+    description: "Curated solid brass handles, matte black pulls, and precision security fittings mounted on oak panels."
   }
 ];
 
