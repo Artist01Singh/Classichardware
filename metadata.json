@@ -1,0 +1,7 @@
+{
+  "name": "Classic Hardware",
+  "description": "Premier architectural hardware, luxury door fittings, precision locks, and cabinet fixtures showroom. Explore collections and schedule showroom consultations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
